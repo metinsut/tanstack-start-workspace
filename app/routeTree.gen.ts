@@ -11,115 +11,95 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
-import { Route as MyTaskImport } from './routes/_my-task'
-import { Route as IndexImport } from './routes/index'
-import { Route as dashboardMyTestImport } from './routes/(dashboard)/my-test'
-import { Route as dashboardMyInterviewImport } from './routes/(dashboard)/my-interview'
+import { Route as dashboardRouteImport } from './routes/(dashboard)/route'
+import { Route as authRouteImport } from './routes/(auth)/route'
+import { Route as dashboardIndexImport } from './routes/(dashboard)/index'
 import { Route as authRegisterImport } from './routes/(auth)/register'
 import { Route as authLoginImport } from './routes/(auth)/login'
-import { Route as authLayoutImport } from './routes/(auth)/layout'
 import { Route as dashboardUserIndexImport } from './routes/(dashboard)/user/index'
 import { Route as dashboardCommentIndexImport } from './routes/(dashboard)/comment/index'
 import { Route as dashboardUserUserIdImport } from './routes/(dashboard)/user/$userId'
+import { Route as dashboardmyTaskMyTestImport } from './routes/(dashboard)/(my-task)/my-test'
+import { Route as dashboardmyTaskMyInterviewImport } from './routes/(dashboard)/(my-task)/my-interview'
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
+const dashboardRouteRoute = dashboardRouteImport.update({
+  id: '/(dashboard)',
   getParentRoute: () => rootRoute,
 } as any)
 
-const MyTaskRoute = MyTaskImport.update({
-  id: '/_my-task',
+const authRouteRoute = authRouteImport.update({
+  id: '/(auth)',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const dashboardIndexRoute = dashboardIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const dashboardMyTestRoute = dashboardMyTestImport.update({
-  id: '/(dashboard)/my-test',
-  path: '/my-test',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const dashboardMyInterviewRoute = dashboardMyInterviewImport.update({
-  id: '/(dashboard)/my-interview',
-  path: '/my-interview',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardRouteRoute,
 } as any)
 
 const authRegisterRoute = authRegisterImport.update({
-  id: '/(auth)/register',
+  id: '/register',
   path: '/register',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => authRouteRoute,
 } as any)
 
 const authLoginRoute = authLoginImport.update({
-  id: '/(auth)/login',
+  id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const authLayoutRoute = authLayoutImport.update({
-  id: '/(auth)/layout',
-  path: '/layout',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => authRouteRoute,
 } as any)
 
 const dashboardUserIndexRoute = dashboardUserIndexImport.update({
-  id: '/(dashboard)/user/',
+  id: '/user/',
   path: '/user/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardRouteRoute,
 } as any)
 
 const dashboardCommentIndexRoute = dashboardCommentIndexImport.update({
-  id: '/(dashboard)/comment/',
+  id: '/comment/',
   path: '/comment/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardRouteRoute,
 } as any)
 
 const dashboardUserUserIdRoute = dashboardUserUserIdImport.update({
-  id: '/(dashboard)/user/$userId',
+  id: '/user/$userId',
   path: '/user/$userId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => dashboardRouteRoute,
 } as any)
+
+const dashboardmyTaskMyTestRoute = dashboardmyTaskMyTestImport.update({
+  id: '/(my-task)/my-test',
+  path: '/my-test',
+  getParentRoute: () => dashboardRouteRoute,
+} as any)
+
+const dashboardmyTaskMyInterviewRoute = dashboardmyTaskMyInterviewImport.update(
+  {
+    id: '/(my-task)/my-interview',
+    path: '/my-interview',
+    getParentRoute: () => dashboardRouteRoute,
+  } as any,
+)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(auth)': {
+      id: '/(auth)'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof authRouteImport
       parentRoute: typeof rootRoute
     }
-    '/_my-task': {
-      id: '/_my-task'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof MyTaskImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/layout': {
-      id: '/(auth)/layout'
-      path: '/layout'
-      fullPath: '/layout'
-      preLoaderRoute: typeof authLayoutImport
+    '/(dashboard)': {
+      id: '/(dashboard)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof dashboardRouteImport
       parentRoute: typeof rootRoute
     }
     '/(auth)/login': {
@@ -127,78 +107,115 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authLoginImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof authRouteImport
     }
     '/(auth)/register': {
       id: '/(auth)/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof authRegisterImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof authRouteImport
     }
-    '/(dashboard)/my-interview': {
-      id: '/(dashboard)/my-interview'
+    '/(dashboard)/': {
+      id: '/(dashboard)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof dashboardIndexImport
+      parentRoute: typeof dashboardRouteImport
+    }
+    '/(dashboard)/(my-task)/my-interview': {
+      id: '/(dashboard)/(my-task)/my-interview'
       path: '/my-interview'
       fullPath: '/my-interview'
-      preLoaderRoute: typeof dashboardMyInterviewImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof dashboardmyTaskMyInterviewImport
+      parentRoute: typeof dashboardRouteImport
     }
-    '/(dashboard)/my-test': {
-      id: '/(dashboard)/my-test'
+    '/(dashboard)/(my-task)/my-test': {
+      id: '/(dashboard)/(my-task)/my-test'
       path: '/my-test'
       fullPath: '/my-test'
-      preLoaderRoute: typeof dashboardMyTestImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof dashboardmyTaskMyTestImport
+      parentRoute: typeof dashboardRouteImport
     }
     '/(dashboard)/user/$userId': {
       id: '/(dashboard)/user/$userId'
       path: '/user/$userId'
       fullPath: '/user/$userId'
       preLoaderRoute: typeof dashboardUserUserIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardRouteImport
     }
     '/(dashboard)/comment/': {
       id: '/(dashboard)/comment/'
       path: '/comment'
       fullPath: '/comment'
       preLoaderRoute: typeof dashboardCommentIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardRouteImport
     }
     '/(dashboard)/user/': {
       id: '/(dashboard)/user/'
       path: '/user'
       fullPath: '/user'
       preLoaderRoute: typeof dashboardUserIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof dashboardRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface authRouteRouteChildren {
+  authLoginRoute: typeof authLoginRoute
+  authRegisterRoute: typeof authRegisterRoute
+}
+
+const authRouteRouteChildren: authRouteRouteChildren = {
+  authLoginRoute: authLoginRoute,
+  authRegisterRoute: authRegisterRoute,
+}
+
+const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
+  authRouteRouteChildren,
+)
+
+interface dashboardRouteRouteChildren {
+  dashboardIndexRoute: typeof dashboardIndexRoute
+  dashboardmyTaskMyInterviewRoute: typeof dashboardmyTaskMyInterviewRoute
+  dashboardmyTaskMyTestRoute: typeof dashboardmyTaskMyTestRoute
+  dashboardUserUserIdRoute: typeof dashboardUserUserIdRoute
+  dashboardCommentIndexRoute: typeof dashboardCommentIndexRoute
+  dashboardUserIndexRoute: typeof dashboardUserIndexRoute
+}
+
+const dashboardRouteRouteChildren: dashboardRouteRouteChildren = {
+  dashboardIndexRoute: dashboardIndexRoute,
+  dashboardmyTaskMyInterviewRoute: dashboardmyTaskMyInterviewRoute,
+  dashboardmyTaskMyTestRoute: dashboardmyTaskMyTestRoute,
+  dashboardUserUserIdRoute: dashboardUserUserIdRoute,
+  dashboardCommentIndexRoute: dashboardCommentIndexRoute,
+  dashboardUserIndexRoute: dashboardUserIndexRoute,
+}
+
+const dashboardRouteRouteWithChildren = dashboardRouteRoute._addFileChildren(
+  dashboardRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof MyTaskRoute
-  '/about': typeof AboutRoute
-  '/layout': typeof authLayoutRoute
+  '/': typeof dashboardIndexRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
-  '/my-interview': typeof dashboardMyInterviewRoute
-  '/my-test': typeof dashboardMyTestRoute
+  '/my-interview': typeof dashboardmyTaskMyInterviewRoute
+  '/my-test': typeof dashboardmyTaskMyTestRoute
   '/user/$userId': typeof dashboardUserUserIdRoute
   '/comment': typeof dashboardCommentIndexRoute
   '/user': typeof dashboardUserIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof MyTaskRoute
-  '/about': typeof AboutRoute
-  '/layout': typeof authLayoutRoute
+  '/': typeof dashboardIndexRoute
   '/login': typeof authLoginRoute
   '/register': typeof authRegisterRoute
-  '/my-interview': typeof dashboardMyInterviewRoute
-  '/my-test': typeof dashboardMyTestRoute
+  '/my-interview': typeof dashboardmyTaskMyInterviewRoute
+  '/my-test': typeof dashboardmyTaskMyTestRoute
   '/user/$userId': typeof dashboardUserUserIdRoute
   '/comment': typeof dashboardCommentIndexRoute
   '/user': typeof dashboardUserIndexRoute
@@ -206,14 +223,13 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_my-task': typeof MyTaskRoute
-  '/about': typeof AboutRoute
-  '/(auth)/layout': typeof authLayoutRoute
+  '/(auth)': typeof authRouteRouteWithChildren
+  '/(dashboard)': typeof dashboardRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/register': typeof authRegisterRoute
-  '/(dashboard)/my-interview': typeof dashboardMyInterviewRoute
-  '/(dashboard)/my-test': typeof dashboardMyTestRoute
+  '/(dashboard)/': typeof dashboardIndexRoute
+  '/(dashboard)/(my-task)/my-interview': typeof dashboardmyTaskMyInterviewRoute
+  '/(dashboard)/(my-task)/my-test': typeof dashboardmyTaskMyTestRoute
   '/(dashboard)/user/$userId': typeof dashboardUserUserIdRoute
   '/(dashboard)/comment/': typeof dashboardCommentIndexRoute
   '/(dashboard)/user/': typeof dashboardUserIndexRoute
@@ -223,9 +239,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | ''
-    | '/about'
-    | '/layout'
     | '/login'
     | '/register'
     | '/my-interview'
@@ -236,9 +249,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | ''
-    | '/about'
-    | '/layout'
     | '/login'
     | '/register'
     | '/my-interview'
@@ -248,14 +258,13 @@ export interface FileRouteTypes {
     | '/user'
   id:
     | '__root__'
-    | '/'
-    | '/_my-task'
-    | '/about'
-    | '/(auth)/layout'
+    | '/(auth)'
+    | '/(dashboard)'
     | '/(auth)/login'
     | '/(auth)/register'
-    | '/(dashboard)/my-interview'
-    | '/(dashboard)/my-test'
+    | '/(dashboard)/'
+    | '/(dashboard)/(my-task)/my-interview'
+    | '/(dashboard)/(my-task)/my-test'
     | '/(dashboard)/user/$userId'
     | '/(dashboard)/comment/'
     | '/(dashboard)/user/'
@@ -263,31 +272,13 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  MyTaskRoute: typeof MyTaskRoute
-  AboutRoute: typeof AboutRoute
-  authLayoutRoute: typeof authLayoutRoute
-  authLoginRoute: typeof authLoginRoute
-  authRegisterRoute: typeof authRegisterRoute
-  dashboardMyInterviewRoute: typeof dashboardMyInterviewRoute
-  dashboardMyTestRoute: typeof dashboardMyTestRoute
-  dashboardUserUserIdRoute: typeof dashboardUserUserIdRoute
-  dashboardCommentIndexRoute: typeof dashboardCommentIndexRoute
-  dashboardUserIndexRoute: typeof dashboardUserIndexRoute
+  authRouteRoute: typeof authRouteRouteWithChildren
+  dashboardRouteRoute: typeof dashboardRouteRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  MyTaskRoute: MyTaskRoute,
-  AboutRoute: AboutRoute,
-  authLayoutRoute: authLayoutRoute,
-  authLoginRoute: authLoginRoute,
-  authRegisterRoute: authRegisterRoute,
-  dashboardMyInterviewRoute: dashboardMyInterviewRoute,
-  dashboardMyTestRoute: dashboardMyTestRoute,
-  dashboardUserUserIdRoute: dashboardUserUserIdRoute,
-  dashboardCommentIndexRoute: dashboardCommentIndexRoute,
-  dashboardUserIndexRoute: dashboardUserIndexRoute,
+  authRouteRoute: authRouteRouteWithChildren,
+  dashboardRouteRoute: dashboardRouteRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -300,51 +291,59 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/_my-task",
-        "/about",
-        "/(auth)/layout",
+        "/(auth)",
+        "/(dashboard)"
+      ]
+    },
+    "/(auth)": {
+      "filePath": "(auth)/route.tsx",
+      "children": [
         "/(auth)/login",
-        "/(auth)/register",
-        "/(dashboard)/my-interview",
-        "/(dashboard)/my-test",
+        "/(auth)/register"
+      ]
+    },
+    "/(dashboard)": {
+      "filePath": "(dashboard)/route.tsx",
+      "children": [
+        "/(dashboard)/",
+        "/(dashboard)/(my-task)/my-interview",
+        "/(dashboard)/(my-task)/my-test",
         "/(dashboard)/user/$userId",
         "/(dashboard)/comment/",
         "/(dashboard)/user/"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_my-task": {
-      "filePath": "_my-task.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/(auth)/layout": {
-      "filePath": "(auth)/layout.tsx"
-    },
     "/(auth)/login": {
-      "filePath": "(auth)/login.tsx"
+      "filePath": "(auth)/login.tsx",
+      "parent": "/(auth)"
     },
     "/(auth)/register": {
-      "filePath": "(auth)/register.tsx"
+      "filePath": "(auth)/register.tsx",
+      "parent": "/(auth)"
     },
-    "/(dashboard)/my-interview": {
-      "filePath": "(dashboard)/my-interview.tsx"
+    "/(dashboard)/": {
+      "filePath": "(dashboard)/index.tsx",
+      "parent": "/(dashboard)"
     },
-    "/(dashboard)/my-test": {
-      "filePath": "(dashboard)/my-test.tsx"
+    "/(dashboard)/(my-task)/my-interview": {
+      "filePath": "(dashboard)/(my-task)/my-interview.tsx",
+      "parent": "/(dashboard)"
+    },
+    "/(dashboard)/(my-task)/my-test": {
+      "filePath": "(dashboard)/(my-task)/my-test.tsx",
+      "parent": "/(dashboard)"
     },
     "/(dashboard)/user/$userId": {
-      "filePath": "(dashboard)/user/$userId.tsx"
+      "filePath": "(dashboard)/user/$userId.tsx",
+      "parent": "/(dashboard)"
     },
     "/(dashboard)/comment/": {
-      "filePath": "(dashboard)/comment/index.tsx"
+      "filePath": "(dashboard)/comment/index.tsx",
+      "parent": "/(dashboard)"
     },
     "/(dashboard)/user/": {
-      "filePath": "(dashboard)/user/index.tsx"
+      "filePath": "(dashboard)/user/index.tsx",
+      "parent": "/(dashboard)"
     }
   }
 }

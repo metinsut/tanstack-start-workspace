@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Input, Button } from "~/components/ui";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 export const Route = createFileRoute("/(auth)/login")({
   component: RouteComponent,
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/(auth)/login")({
 function RouteComponent() {
   return (
     <div className="flex flex-col gap-4 justify-start">
-      <p>Hello "/(auth)/login"!</p>
+      <p>Login</p>
       <Input name="email" placeholder="Enter your email" />
       <Button>Login</Button>
     </div>
