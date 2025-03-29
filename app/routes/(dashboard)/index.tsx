@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DenemePage } from "./-deneme";
+import { NoneRouteFile } from "./-none-route-file";
 
 export const Route = createFileRoute("/(dashboard)/")({
   component: RouteComponent,
@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <div>
       Home Page
-      <DenemePage />
+      <NoneRouteFile />
     </div>
   );
 }
