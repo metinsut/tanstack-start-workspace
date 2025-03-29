@@ -1,0 +1,40 @@
+{
+  "name": "tanstack-start",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vinxi dev --open",
+    "build": "vinxi build",
+    "start": "vinxi start",
+    "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .output && rm -rf .vinxi",
+    "lint": "bunx @biomejs/biome check .",
+    "lint:fix": "bunx @biomejs/biome check . --write",
+    "lint:unsafe": "bunx @biomejs/biome check . --write --unsafe"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.2",
+    "@tanstack/react-router": "latest",
+    "@tanstack/react-start": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwind-merge": "latest",
+    "tw-animate-css": "latest",
+    "vinxi": "latest"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "@tailwindcss/vite": "latest",
+    "@types/bun": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "typescript": "latest",
+    "tailwindcss": "latest",
+    "vite-tsconfig-paths": "latest"
+  }
+}
