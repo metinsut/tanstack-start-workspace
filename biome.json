@@ -13,7 +13,7 @@
       "correctness": {
         "noUnusedImports": "error",
         "noUnusedVariables": "error",
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "info"
       }
     }
   },
