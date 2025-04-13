@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "vinxi dev --open",
+    "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
     "clear": "rm -rf node_modules && rm -rf dist && rm -rf bun.lock && rm -rf .output && rm -rf .vinxi",
